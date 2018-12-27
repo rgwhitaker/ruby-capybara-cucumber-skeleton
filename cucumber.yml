@@ -1,0 +1,24 @@
+default: -p chrome
+browserstack : DRIVER=browserstack
+testingbot: DRIVER=testingbot
+poltergeist : DRIVER=poltergeist
+selenium : DRIVER=selenium
+appium : DRIVER=appium
+api : DRIVER=poltergeist --tags @api
+appium_android_web : DRIVER=appium_android_web
+sauce : DRIVER=sauce
+pretty: -f pretty
+html: -p pretty --format html --out reports\<%= Time.now.strftime("%Y%m%d-%H%M%S") %>-cucumber-report.html
+
+#Browsers
+ie: DRIVER=ie
+firefox: DRIVER=firefox
+chrome: DRIVER=chrome
+chrome_headless: DRIVER=chrome_headless
+chrome_remote: DRIVER=chrome_remote
+
+#Environments
+
+#Jenkins
+jenkins: -p pretty --format json --out features\dfe\reports\<%= Time.now.strftime("%Y%m%d-%H%M%S") %>-cucumber-report.json
+jenkins_parallel: -p pretty --format json --out features\dfe\reports\<%= ENV['TEST_ENV_NUMBER']%><%= Time.now.strftime("%Y%m%d-%H%M%S") %>-cucumber-report.json
